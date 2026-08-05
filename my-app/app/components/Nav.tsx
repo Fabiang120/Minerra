@@ -22,12 +22,18 @@ export default function Nav() {
         </Link>
         {links.map((l) => (
           <Link
+            className="sm:hidden md:block"
             key={l.to}
             href={l.to}
           >
             {l.label}
           </Link>
         ))}
+        <Link href="/getstarted">
+          <button>
+            GET STARTED
+          </button>
+        </Link>
       </menu>
     </nav>
   )
