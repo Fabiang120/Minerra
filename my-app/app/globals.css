@@ -5,11 +5,9 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme{
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-logo: var(--font-allura), cursive;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +21,51 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =======================================================
+   GLOBAL HTML ELEMENT TYPOGRAPHY SYSTEM
+   ======================================================= */
+@layer base {
+  body {
+    @apply font-sans text-sm bg-neutral-950 text-neutral-100 antialiased;
+  }
+
+  /* 1. text-xs (12px) — labels, eyebrows, table headers, badges, meta */
+  th,
+  label,
+  dt,
+  figcaption {
+    @apply text-xs font-mono uppercase tracking-wider text-neutral-400;
+  }
+
+  /* 2. text-sm (14px) — table cells, body copy, buttons, nav links */
+  p,
+  td,
+  button {
+    @apply text-sm;
+  }
+
+  /* Buttons automatically get correct weight & cursor */
+  button {
+    @apply font-medium tracking-wider cursor-pointer;
+  }
+
+  /* 3. text-base (16px) — lead paragraphs, card titles */
+  h4,
+  h5 {
+    @apply text-base font-semibold text-white;
+  }
+
+  /* 4. text-xl (20px) — stat numbers, section headings */
+  h2,
+  h3,
+  dd {
+    @apply text-xl font-semibold text-white tracking-tight;
+  }
+
+  /* 5. text-3xl (30px) — standard page headings (h1) */
+  h1 {
+    @apply text-3xl font-bold text-white tracking-tight;
+  }
 }
