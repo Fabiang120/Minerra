@@ -10,7 +10,7 @@ const links = [
 
 export default function Nav() {
   return (
-    <nav className="col-span-full w-full">
+    <nav className="col-span-full w-full lg:col-start-2 lg:col-end-8 xl:col-start-3 xl:col-end-11">
       <menu className="flex items-center justify-between">
         <Link href="/" aria-label="Minerra home" className="shrink-0">
           <span
@@ -30,7 +30,7 @@ export default function Nav() {
           </Link>
         ))}
         <Link href="/getstarted" className="text-sm">
-          <button>
+          <button className="border-gray-400 border-2 px-4 py-1">
             GET STARTED
           </button>
         </Link>
