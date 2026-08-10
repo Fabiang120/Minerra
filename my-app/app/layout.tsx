@@ -32,7 +32,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${allura.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font=sans text-base text-enutral-100 bg-neutral-950">
+      <body className="min-h-full flex flex-col font=sans text-base text-neutral-100 bg-background">
         <Header>
           <Nav/>
         </Header>

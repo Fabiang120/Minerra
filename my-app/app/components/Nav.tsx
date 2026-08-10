@@ -30,7 +30,7 @@ export default function Nav() {
           </Link>
         ))}
         <Link href="/getstarted" className="text-sm">
-          <button className="border-gray-400 border-2 px-4 py-1">
+          <button className="border-steel border-2 px-4 py-1">
             GET STARTED
           </button>
         </Link>

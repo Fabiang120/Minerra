@@ -4,6 +4,11 @@
   /* Font Family Definitions (Inter default + Allura script logo) */
   --font-sans: "Inter", var(--font-inter, system-ui), -apple-system, sans-serif;
   --font-logo: "Allura", var(--font-allura, cursive), cursive;
+  --color-steel: #757E97;
+  --color-background: #0a0a0a;
+  --color-darksteel: #4E5568;
+  --color-gold-dark: #523D19;
+  --color-gold-bright: #A27B38;
 }
 
 /* =======================================================
@@ -25,7 +30,7 @@
   /* 2. text-sm (14px) — table cells, body copy, buttons, nav links */
   p,
   td {
-    @apply text-sm leading-relaxed;
+    @apply text-sm leading-relaxed text-steel;
   }
 
   button {
