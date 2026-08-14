@@ -6,7 +6,7 @@ export default function Vendors() {
     { label: "Vendors", value: "8" },
     { label: "Countries", value: "7" },
   ];
-  const [vendors] = useState(["All", "Americas", "Europe"]);
+  const [vendors] = useState(["All", "Americas", "Europe", "Asia", "MENA"]);
   const [selectedVendor, setSelectedVendor] = useState("All");
   const handleSelectedVendor = (vendor: string) => {
     setSelectedVendor(vendor);
@@ -29,9 +29,9 @@ export default function Vendors() {
           </div>
         ))}
       </div>
-      <div>
+      <div className="grid grid-flow-col auto-cols-fr gap-2">
         {vendors.map((v) => {
-          return <button key={v} onClick={() => handleSelectedVendor(v)}>{v}</button>
+          return <button className="w-full py-2 rounded-sm bg-button-gray" key={v} onClick={() => handleSelectedVendor(v)}>{v}</button>
         })}
       </div>
     </section>

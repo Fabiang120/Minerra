@@ -1,8 +1,8 @@
 "use client"
 import { useState } from 'react';
 export default function Miners() {
-  const [coins] = useState(["Bitcoin", "zCash"]);
-  const [selectedCoin, setSelectedCoin] = useState("Bitcoin");
+  const [coins] = useState(["BTC", "ZEC", "LTC", "DOGE", "ETC", "XMR", "KDA", "ALEO", "RXD", "GRIN"]);
+  const [selectedCoin, setSelectedCoin] = useState("BTC");
   const [searchedMiner, setSearchedMiner] = useState("");
   const handleSearchedMiner = (miner: string) => {
     setSearchedMiner(miner);
@@ -17,9 +17,9 @@ export default function Miners() {
       <h4>Profitability</h4>
       <h2>ASIC miners.</h2>
       <p>Every modern ASIC ranked by daily net profitability at industrial pricing of $0.06 / kWh.</p>
-      <div>
+      <div className="grid grid-flow-col auto-cols-fr gap-2">
         {coins.map((c) => {
-          return <button key={c} onClick={() => handleSelectCoin(c)}>{c}</button>
+          return <button className="w-full py-2 rounded-sm bg-button-gray" key={c} onClick={() => handleSelectCoin(c)}>{c}</button>
         })}
       </div>
       <div>
