@@ -8,6 +8,8 @@ export default function Vendors() {
   ];
   const [vendors] = useState(["All", "Americas", "Europe", "Asia", "MENA"]);
   const [selectedVendor, setSelectedVendor] = useState("All");
+  const [searchedVendor, setSearchedVendor] = useState("");
+
   const handleSelectedVendor = (vendor: string) => {
     setSelectedVendor(vendor);
   }
@@ -33,6 +35,31 @@ export default function Vendors() {
         {vendors.map((v) => {
           return <button className="w-full py-2 rounded-sm bg-button-gray" key={v} onClick={() => handleSelectedVendor(v)}>{v}</button>
         })}
+      </div>
+      <div className="relative w-full">
+        <svg
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          width="16"
+          height="16"
+          className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+          aria-hidden="true"
+        >
+          <path
+            fillRule="evenodd"
+            d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.45 4.39l3.08 3.08a.75.75 0 11-1.06 1.06l-3.08-3.08A7 7 0 012 9z"
+            clipRule="evenodd"
+          />
+        </svg>
+        <input
+          id="search-miner"
+          aria-label="Search miners"
+          className="bg-button-gray rounded-sm w-full py-2 pl-9 pr-3"
+          type="text"
+          value={searchedVendor}
+          onChange={(e) => setSearchedVendor(e.target.value)}
+          placeholder="Search vendors"
+        />
       </div>
     </section>
   );
