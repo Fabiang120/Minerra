@@ -77,8 +77,8 @@ export default function Miners() {
   }
 
   return (
-    <section className="px-12 py-[3vw] mt-20 grid sm:grid-cols-4 md:grid-cols-8 md:py-[1.4vw] xl:grid-cols-12 gap-3">
-      <div className="col-start-1 col-end-5 lg:col-start-1 lg:col-end-3 xl:col-start-1 xl:col-end-2 flex flex-col gap-3 mb-6 lg:mb-0">
+    <section className="px-6 py-[2vw] mt-8 grid sm:grid-cols-4 md:grid-cols-8 md:py-[1.2vw] xl:grid-cols-12 gap-3">
+      <div className="col-span-full max-w-[50%] md:max-w-[40%] lg:max-w-[58%] lg:col-start-1 lg:col-end-4 xl:max-w-[70%] xl:col-start-1 xl:col-end-4 flex flex-col gap-6 mb-6 lg:mb-0">
         <h4 className="text-xs font-medium tracking-[0.15em] text-gold uppercase">
           Profitability
         </h4>
@@ -94,7 +94,7 @@ export default function Miners() {
         </div>
       </div>
 
-      <div className="col-start-1 col-end-5 lg:col-start-3 lg:col-end-9 xl:col-start-2 xl:col-end-13 flex flex-col gap-6">
+      <div className="col-span-full min-w-0 flex flex-col gap-6 lg:col-start-4 lg:col-end-9 xl:col-start-4 xl:col-end-13">
         <div className="flex flex-wrap gap-2 content-start items-start justify-start">
           {coins.map((c) => {
             return (
@@ -136,10 +136,10 @@ export default function Miners() {
         </div>
 
         <div className="bg-surface overflow-x-auto">
-          <table>
+          <table className="w-full">
             <thead className="border-b border-border">
               <tr>
-                <th className="text-left text-xs uppercase tracking-[0.15em] font-medium text-muted-foreground py-4 px-4 ">MODEL</th>
+                <th className="text-left text-xs uppercase tracking-[0.15em] font-medium text-muted-foreground py-4 px-4">MODEL</th>
                 <th className="text-left text-xs uppercase tracking-[0.15em] font-medium text-muted-foreground py-4 px-4 ">HASHRATE</th>
                 <th className="text-left text-xs uppercase tracking-[0.15em] font-medium text-muted-foreground py-4 px-4 ">POWER</th>
                 <th className="text-left text-xs uppercase tracking-[0.15em] font-medium text-muted-foreground py-4 px-4 ">PROFIT / DAY</th>

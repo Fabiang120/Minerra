@@ -10,8 +10,8 @@ const links = [
 
 export default function Nav() {
   return (
-    <nav className="col-span-full w-full lg:col-start-2 lg:col-end-8 xl:col-start-3 xl:col-end-11">
-      <menu className="flex items-center justify-between">
+    <nav className="col-span-full w-full xl:col-start-2 xl:col-end-12">
+      <menu className="flex items-center justify-between w-full">
         <Link href="/" aria-label="Minerra home" className="shrink-0">
           <span
             className="text-3xl leading-none text-foreground"
@@ -20,15 +20,17 @@ export default function Nav() {
             Minerra
           </span>
         </Link>
-        {links.map((l) => (
-          <Link
-            className="hidden md:block text-sm"
-            key={l.to}
-            href={l.to}
-          >
-            {l.label}
-          </Link>
-        ))}
+        <div className="hidden md:flex items-center gap-6 mx-auto">
+          {links.map((l) => (
+            <Link
+              key={l.to}
+              href={l.to}
+              className="text-sm hover:text-foreground text-muted-foreground transition-colors"
+            >
+              {l.label}
+            </Link>
+          ))}
+        </div>
         <Link href="/getstarted" className="text-sm">
           <button className="border-steel border-2 px-4 py-1">
             GET STARTED
