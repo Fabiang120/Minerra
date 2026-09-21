@@ -8,6 +8,7 @@ export default function Miners() {
       id: "1",
       name: "Antminer S21 Hyd.",
       coin: "BTC",
+      release: "May 2024",
       hashrate: "335 TH/s",
       power: "5360 W",
       algorithm: "SHA-256",
@@ -20,6 +21,7 @@ export default function Miners() {
       id: "2",
       name: "Whatsminer M66S",
       coin: "BTC",
+      release: "Jan 2024",
       hashrate: "298 TH/s",
       power: "5513 W",
       algorithm: "SHA-256",
@@ -32,6 +34,7 @@ export default function Miners() {
       id: "3",
       name: "Antminer L7",
       coin: "LTC",
+      release: "Aug 2021",
       hashrate: "9.5 GH/s",
       power: "3425 W",
       algorithm: "Scrypt",
@@ -44,6 +47,7 @@ export default function Miners() {
       id: "4",
       name: "Antminer KS5 Pro",
       coin: "KAS",
+      release: "Apr 2024",
       hashrate: "21 TH/s",
       power: "3150 W",
       algorithm: "kHeavyHash",
@@ -56,6 +60,7 @@ export default function Miners() {
       id: "5",
       name: "iPollo V1 Mini",
       coin: "ETC",
+      release: "Jun 2022",
       hashrate: "300 MH/s",
       power: "240 W",
       algorithm: "Etchash",
@@ -77,18 +82,18 @@ export default function Miners() {
   }
 
   return (
-    <section className="px-6 py-[2vw] mt-8 grid sm:grid-cols-4 md:grid-cols-8 md:py-[1.2vw] xl:grid-cols-12 gap-3">
-      <div className="col-span-full max-w-[50%] md:max-w-[40%] lg:max-w-[58%] lg:col-start-1 lg:col-end-4 xl:max-w-[70%] xl:col-start-1 xl:col-end-4 flex flex-col gap-6 mb-6 lg:mb-0">
+    <section className="px-4 pt-12 pb-24 mt-8 grid sm:grid-cols-4 md:grid-cols-8 md:px-6 md:pt-16 xl:grid-cols-12 gap-3">
+      <div className="col-span-full lg:col-start-1 lg:col-end-4 xl:col-start-1 xl:col-end-4 flex flex-col mb-6 lg:mb-0 gap-4">
         <h4 className="text-xs font-medium tracking-[0.15em] text-gold uppercase">
           Profitability
         </h4>
-        <h2 className="text-foreground tracking-tight">
+        <h1>
           ASIC miners.
-        </h2>
-        <p className="text-muted-foreground">
+        </h1>
+        <p className="mt-2 max-w-[44ch]">
           Every modern ASIC ranked by daily net profitability at industrial pricing of $0.06 / kWh.
         </p>
-        <div className="flex items-center gap-1">
+        <div className="mt-2 flex items-center gap-1">
           <span className="bg-surface text-foreground font-medium text-xs rounded-lg py-2 px-3">BTC $64,281.00</span>
           <span className="bg-surface text-muted-foreground font-medium text-xs rounded-lg py-2 px-3">$0.06 / kWh</span>
         </div>
@@ -135,26 +140,44 @@ export default function Miners() {
           />
         </div>
 
-        <div className="bg-surface overflow-x-auto">
-          <table className="w-full">
-            <thead className="border-b border-border">
-              <tr>
-                <th className="text-left text-xs uppercase tracking-[0.15em] font-medium text-muted-foreground py-4 px-4">MODEL</th>
-                <th className="text-left text-xs uppercase tracking-[0.15em] font-medium text-muted-foreground py-4 px-4 ">HASHRATE</th>
-                <th className="text-left text-xs uppercase tracking-[0.15em] font-medium text-muted-foreground py-4 px-4 ">POWER</th>
-                <th className="text-left text-xs uppercase tracking-[0.15em] font-medium text-muted-foreground py-4 px-4 ">PROFIT / DAY</th>
-                <th className="text-left text-xs uppercase tracking-[0.15em] font-medium text-muted-foreground py-4 px-4 ">STATUS</th>
+        <div className="bg-surface rounded-2xl overflow-hidden w-full">
+          <table className="w-full text-left">
+            <thead>
+              <tr className="bg-surface-elevated border-b border-border text-xs uppercase tracking-wider text-muted-foreground font-medium">
+                <th className="py-4 px-4">MODEL</th>
+                <th className="py-4 px-4 hidden lg:block">RELEASE</th>
+                <th className="py-4 px-4">HASHRATE</th>
+                <th className="py-4 px-4">POWER</th>
+                <th className="py-4 px-4 hidden lg:block">ALGORITHM</th>
+                <th className="py-4 px-4">PROFIT / DAY</th>
+                <th className="py-4 px-4">STATUS</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-border text-sm">
               {miners.map((m) => {
                 return (
-                  <tr key={m.id} className="border-b border-border hover:bg-surface-elevated transition-colors">
-                    <td className="text-left text-xs tracking-wider text-foreground py-3 px-4 ">{m.name}</td>
-                    <td className="text-left text-xs tracking-wider tabular-nums text-foreground py-6 px-4 ">{m.hashrate}</td>
-                    <td className="text-left text-xs tracking-wider tabular-nums text-muted-foreground py-6 px-4 ">{m.power}</td>
-                    <td className="text-left text-xs tracking-wider tabular-nums font-medium text-success py-6 px-4 ">{m.profit}</td>
-                    <td className="text-left text-xs tracking-wider text-muted-foreground py-6 px-4 ">{m.status}</td>
+                  <tr key={m.id} className="hover:bg-surface-elevated/50 transition-colors">
+                    <td className="py-4 px-4">
+                      <div className="flex items-center gap-3">
+                        <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${m.coinBg}`}>
+                          {m.coinSymbol}
+                        </span>
+                        <div>
+                          <div className="text-foreground">{m.name}</div>
+                          <div className="text-xs text-muted-foreground">{m.coin}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="py-4 px-4 text-muted-foreground hidden lg:table-cell">{m.release}</td>
+                    <td className="py-4 px-4 text-foreground tabular-nums">{m.hashrate}</td>
+                    <td className="py-4 px-4 text-muted-foreground tabular-nums">{m.power}</td>
+                    <td className="py-4 px-4 text-muted-foreground tabular-nums hidden lg:table-cell">{m.algorithm}</td>
+                    <td className="py-4 px-4 text-success tabular-nums">{m.profit}</td>
+                    <td className="py-4 px-4">
+                      <span className="text-xs border border-border px-2.5 py-1 rounded-md text-muted-foreground">
+                        {m.status}
+                      </span>
+                    </td>
                   </tr>
                 );
               })}
