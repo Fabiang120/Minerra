@@ -6,32 +6,97 @@ export default function Vendors() {
     { label: "Vendors", value: "8" },
     { label: "Countries", value: "7" },
   ];
-  const [countries] = useState(["All", "Americas", "Europe", "Asia", "MENA"]);
 
   type Vendor = {
+    description: string;
     vendor: string;
     country: string;
+    region: string;
     payment: string;
     trust: "Trusted" | "Watch";
   };
 
   const VENDORS: Vendor[] = [
-    { vendor: "CoinMining Central", country: "United Kingdom", payment: "Crypto, Wire, Card", trust: "Trusted" },
-    { vendor: "PrintCrypto", country: "United States", payment: "Crypto, Wire, ACH", trust: "Trusted" },
-    { vendor: "Kaboomracks", country: "United States", payment: "BTC, Wire", trust: "Trusted" },
-    { vendor: "AKMiner", country: "Hong Kong", payment: "Crypto, Wire", trust: "Watch" },
-    { vendor: "BT-Miners", country: "United States", payment: "Crypto, Wire, Card", trust: "Trusted" },
-    { vendor: "Vipera Tech", country: "United Arab Emirates", payment: "Crypto, Wire, Escrow", trust: "Trusted" },
-    { vendor: "Cryptominer Bros", country: "Hong Kong", payment: "Crypto, Wire", trust: "Watch" },
-    { vendor: "Mining Cave", country: "Canada", payment: "Crypto, Wire, Card", trust: "Watch" },
+    {
+      vendor: "CoinMining Central",
+      description: "UK-based official distributor providing worldwide shipping and customs clearance.",
+      country: "United Kingdom",
+      region: "Europe",
+      payment: "Crypto, Wire, Card",
+      trust: "Trusted",
+    },
+    {
+      vendor: "PrintCrypto",
+      description: "US reseller specializing in turnkey mining setups, hosting, and ASIC repairs.",
+      country: "United States",
+      region: "Americas",
+      payment: "Crypto, Wire, ACH",
+      trust: "Trusted",
+    },
+    {
+      vendor: "Kaboomracks",
+      description: "Premier US broker known for transparent market pricing and hardware liquidation.",
+      country: "United States",
+      region: "Americas",
+      payment: "BTC, Wire",
+      trust: "Trusted",
+    },
+    {
+      vendor: "AKMiner",
+      description: "Hong Kong supplier offering direct factory pricing on Bitmain and Canaan units.",
+      country: "Hong Kong",
+      region: "Asia",
+      payment: "Crypto, Wire",
+      trust: "Watch",
+    },
+    {
+      vendor: "BT-Miners",
+      description: "New York distributor providing physical showroom inventory and technical support.",
+      country: "United States",
+      region: "Americas",
+      payment: "Crypto, Wire, Card",
+      trust: "Trusted",
+    },
+    {
+      vendor: "Vipera Tech",
+      description: "UAE distributor specializing in large-scale containerized mining solutions.",
+      country: "United Arab Emirates",
+      region: "MENA",
+      payment: "Crypto, Wire, Escrow",
+      trust: "Trusted",
+    },
+    {
+      vendor: "Cryptominer Bros",
+      description: "Hong Kong reseller providing global shipping with verified batch tracking.",
+      country: "Hong Kong",
+      region: "Asia",
+      payment: "Crypto, Wire",
+      trust: "Watch",
+    },
+    {
+      vendor: "Mining Cave",
+      description: "Canadian supplier offering pre-configured home mining setups and GPUs.",
+      country: "Canada",
+      region: "Americas",
+      payment: "Crypto, Wire, Card",
+      trust: "Watch",
+    },
   ];
 
-  const [selectedCountry, setSelectedCountry] = useState("All");
+  const [countries] = useState(["All", "Americas", "Europe", "Asia", "MENA"]);
+  const [selectedRegion, setSelectedRegion] = useState("All");
   const [searchedVendor, setSearchedVendor] = useState("");
 
   const handleSelectedVendor = (vendor: string) => {
-    setSelectedCountry(vendor);
+    setSelectedRegion(vendor);
   }
+
+  const filtered = VENDORS.filter((v) => {
+    const matchesRegion = selectedRegion === "All" || v.region === selectedRegion;
+    const matchesSearch = v.vendor.toLowerCase().includes(searchedVendor.toLocaleLowerCase());
+    return matchesRegion && matchesSearch;
+  })
+
   return (
     <section className="px-4 pt-12 pb-24 mt-8 grid sm:grid-cols-4 md:grid-cols-8 md:px-6 md:pt-16 xl:grid-cols-12 gap-6">
       <div className="col-span-full lg:col-start-1 lg:col-end-4 xl:col-start-1 xl:col-end-4 flex flex-col mb-6 lg:mb-0 gap-4">
@@ -40,23 +105,23 @@ export default function Vendors() {
         <p className="mt-2 max-w-[44ch]">Directory of official distributors and resellers. Each is manually audited — we strike anyone who ships late, ghosts support, or misrepresents inventory.</p>
         <div className="grid gap-px grid-cols-2 overflow-hidden rounded-2xl bg-border ring-1 ring-border">
           {stats.map((s) => (
-            <div key={s.label} className="bg-background p-6 text-left">
-              <div className="text-xl font-medium tabular-nums md:text-3xl">
-                {s.value}
-              </div>
+            <div key={s.label} className="bg-background p-4 text-left">
               <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
                 {s.label}
+              </div>
+              <div className="text-xl font-medium tabular-nums md:text-3xl">
+                {s.value}
               </div>
             </div>
           ))}
         </div>
       </div>
       <div className="col-span-full min-w-0 flex flex-col gap-6 lg:col-start-4 lg:col-end-9 xl:col-start-4 xl:col-end-13">
-        <div className="grid grid-flow-col auto-cols-fr gap-2">
+        <div className="flex flex-wrap gap-2">
           {countries.map((v) => {
             return (
               <button
-                className="py-1.5 px-4 rounded-2xl bg-surface text-muted-foreground hover:text-foreground text-xs font-medium text-center"
+                className="py-1.5 px-4 rounded-2xl bg-surface text-muted-foreground hover:text-foreground text-xs font-medium text-center border-border border-1"
                 key={v}
                 onClick={() => handleSelectedVendor(v)}
               >
@@ -100,35 +165,28 @@ export default function Vendors() {
                 <th className="py-4 px-4">TRUST</th>
               </tr>
             </thead>
-            {/* <tbody className="divide-y divide-border text-sm">
-              {vendors.map((v) => {
+            <tbody className="divide-y divide-border text-sm">
+              {filtered.map((v) => {
                 return (
-                  <tr key={v.id} className="hover:bg-surface-elevated/50 transition-colors">
+                  <tr key={v.vendor} className="hover:bg-surface-elevated/50 transition-colors">
                     <td className="py-4 px-4">
                       <div className="flex items-center gap-3">
-                        <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${m.coinBg}`}>
-                          {m.coinSymbol}
-                        </span>
+                        <span className={"w-10 h-10 flex items-center justify-center text-[10px] font-bold bg-border"}>
+                          {v.vendor}
+                        </span>a
                         <div>
-                          <div className="text-foreground">{m.name}</div>
-                          <div className="text-xs text-muted-foreground">{m.coin}</div>
+                          <div className="text-foreground">{v.vendor}</div>
+                          <div className="text-xs text-muted-foreground">{v.description}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="py-4 px-4 text-muted-foreground hidden lg:table-cell">{m.release}</td>
-                    <td className="py-4 px-4 text-foreground tabular-nums">{m.hashrate}</td>
-                    <td className="py-4 px-4 text-muted-foreground tabular-nums">{m.power}</td>
-                    <td className="py-4 px-4 text-muted-foreground tabular-nums hidden lg:table-cell">{m.algorithm}</td>
-                    <td className="py-4 px-4 text-success tabular-nums">{m.profit}</td>
-                    <td className="py-4 px-4">
-                      <span className="text-xs border border-border px-2.5 py-1 rounded-md text-muted-foreground">
-                        {m.status}
-                      </span>
-                    </td>
+                    <td className="py-4 px-4 text-muted-foreground">{v.country}</td>
+                    <td className="py-4 px-4 text-foreground tabular-nums hidden lg:table-cell">{v.payment}</td>
+                    <td className="py-4 px-4 text-muted-foreground tabular-nums ">{v.trust}</td>
                   </tr>
                 );
               })}
-            </tbody> */}
+            </tbody>
           </table>
         </div>
     </div>

@@ -25,7 +25,7 @@ export default function Home() {
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-px overflow-hidden rounded-2xl bg-border ring-1 ring-border sm:grid-cols-3">
+        <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-px overflow-hidden rounded-2xl bg-border ring-1 ring-border sm:grid-cols-3">
           {stats.map((s) => (
             <div key={s.label} className="bg-background p-6 text-left">
               <div className="text-xl font-medium text-foreground tabular-nums md:text-3xl">
