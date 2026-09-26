@@ -70,16 +70,25 @@ export default function Miners() {
       coinSymbol: "Ξ",
     },
   ]);
-  const [selectedCoin, setSelectedCoin] = useState("BTC");
+  const [selectedCoin, setSelectedCoin] = useState("All");
   const [searchedMiner, setSearchedMiner] = useState("");
 
   const handleSearchedMiner = (miner: string) => {
     setSearchedMiner(miner);
   }
-  const handleSelectCoin = (coin: string) => {
-    setSelectedCoin(coin);
-    console.log("Selected Coin: ", coin);
+  const handleSelectedCoin = (coin: string) => {
+    setSelectedCoin((prev) => (prev === coin ? "All" : coin));
   }
+
+  const filteredMiners = miners.filter((m) => {
+    const matchesCoin = selectedCoin === "All" || m.coin === selectedCoin;
+    const query = searchedMiner.toLowerCase();
+    const matchesSearch =
+      m.name.toLowerCase().includes(query) ||
+      m.algorithm.toLowerCase().includes(query) ||
+      m.coin.toLowerCase().includes(query);
+    return matchesCoin && matchesSearch;
+  });
 
   return (
     <section className="px-4 pt-12 pb-24 mt-8 grid sm:grid-cols-4 md:grid-cols-8 md:px-6 md:pt-16 xl:grid-cols-12 gap-6">
@@ -100,20 +109,23 @@ export default function Miners() {
       </div>
 
       <div className="col-span-full min-w-0 flex flex-col gap-6 lg:col-start-4 lg:col-end-9 xl:col-start-4 xl:col-end-13">
-        <div className="flex flex-wrap gap-2 content-start items-start justify-start">
+        <div className="flex flex-wrap gap-1">
           {coins.map((c) => {
+            const active = selectedCoin === c;
             return (
               <button
-                className="py-1.5 px-4 rounded-2xl bg-surface text-muted-foreground hover:text-foreground text-xs font-medium text-center"
                 key={c}
-                onClick={() => handleSelectCoin(c)}
+                onClick={() => handleSelectedCoin(c)}
+                className={`py-1.5 px-3 rounded-2xl text-xs font-medium transition-colors border ${active
+                    ? "bg-foreground text-background border-foreground font-semibold"
+                    : "bg-surface text-muted-foreground hover:text-foreground border-border"
+                  }`}
               >
                 {c}
               </button>
             );
           })}
         </div>
-
         <div className="relative w-full">
           <svg
             viewBox="0 0 20 20"
@@ -154,7 +166,7 @@ export default function Miners() {
               </tr>
             </thead>
             <tbody className="divide-y divide-border text-sm">
-              {miners.map((m) => {
+              {filteredMiners.map((m) => {
                 return (
                   <tr key={m.id} className="hover:bg-surface-elevated/50 transition-colors">
                     <td className="py-4 px-4">

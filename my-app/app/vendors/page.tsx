@@ -83,19 +83,24 @@ export default function Vendors() {
     },
   ];
 
-  const [countries] = useState(["All", "Americas", "Europe", "Asia", "MENA"]);
+  const [regions] = useState(["All", "Americas", "Europe", "Asia", "MENA"]);
   const [selectedRegion, setSelectedRegion] = useState("All");
   const [searchedVendor, setSearchedVendor] = useState("");
 
-  const handleSelectedVendor = (vendor: string) => {
-    setSelectedRegion(vendor);
-  }
+  // Corrected parameter name and type
+  const handleSelectRegion = (region: string) => {
+    setSelectedRegion((prev) => (prev === region ? "All" : region));
+  };
 
   const filtered = VENDORS.filter((v) => {
     const matchesRegion = selectedRegion === "All" || v.region === selectedRegion;
-    const matchesSearch = v.vendor.toLowerCase().includes(searchedVendor.toLocaleLowerCase());
+    const query = searchedVendor.toLowerCase();
+    const matchesSearch =
+      v.vendor.toLowerCase().includes(query) ||
+      v.description.toLowerCase().includes(query) ||
+      v.country.toLowerCase().includes(query);
     return matchesRegion && matchesSearch;
-  })
+  });
 
   return (
     <section className="px-4 pt-12 pb-24 mt-8 grid sm:grid-cols-4 md:grid-cols-8 md:px-6 md:pt-16 xl:grid-cols-12 gap-6">
@@ -109,27 +114,33 @@ export default function Vendors() {
               <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
                 {s.label}
               </div>
-              <div className="text-xl font-medium tabular-nums md:text-3xl">
+              <div className="text-lg font-medium tabular-nums">
                 {s.value}
               </div>
             </div>
           ))}
         </div>
       </div>
+
       <div className="col-span-full min-w-0 flex flex-col gap-6 lg:col-start-4 lg:col-end-9 xl:col-start-4 xl:col-end-13">
         <div className="flex flex-wrap gap-2">
-          {countries.map((v) => {
+          {regions.map((r) => {
+            const active = selectedRegion === r;
             return (
               <button
-                className="py-1.5 px-4 rounded-2xl bg-surface text-muted-foreground hover:text-foreground text-xs font-medium text-center border-border border-1"
-                key={v}
-                onClick={() => handleSelectedVendor(v)}
+                key={r}
+                onClick={() => handleSelectRegion(r)}
+                className={`py-1.5 px-4 rounded-2xl text-xs font-medium transition-colors border ${active
+                    ? "bg-foreground text-background border-foreground font-semibold"
+                    : "bg-surface text-muted-foreground hover:text-foreground border-border"
+                  }`}
               >
-                {v}
+                {r}
               </button>
             );
           })}
         </div>
+
         <div className="relative w-full">
           <svg
             viewBox="0 0 20 20"
@@ -155,41 +166,45 @@ export default function Vendors() {
             placeholder="Search vendors"
           />
         </div>
+
         <div className="bg-surface rounded-2xl overflow-hidden w-full">
           <table className="w-full text-left">
             <thead>
               <tr className="bg-surface-elevated border-b border-border text-xs uppercase tracking-wider text-muted-foreground font-medium">
                 <th className="py-4 px-4">VENDOR</th>
                 <th className="py-4 px-4">COUNTRY</th>
-                <th className="py-4 px-4 hidden lg:block">PAYMENT</th>
-                <th className="py-4 px-4">TRUST</th>
+                <th className="py-4 px-4 hidden lg:table-cell">PAYMENT</th>
+                <th className="py-4 px-4 text-right">TRUST</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border text-sm">
-              {filtered.map((v) => {
-                return (
-                  <tr key={v.vendor} className="hover:bg-surface-elevated/50 transition-colors">
-                    <td className="py-4 px-4">
-                      <div className="flex items-center gap-3">
-                        <span className={"w-10 h-10 flex items-center justify-center text-[10px] font-bold bg-border"}>
-                          {v.vendor}
-                        </span>a
-                        <div>
-                          <div className="text-foreground">{v.vendor}</div>
-                          <div className="text-xs text-muted-foreground">{v.description}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="py-4 px-4 text-muted-foreground">{v.country}</td>
-                    <td className="py-4 px-4 text-foreground tabular-nums hidden lg:table-cell">{v.payment}</td>
-                    <td className="py-4 px-4 text-muted-foreground tabular-nums ">{v.trust}</td>
-                  </tr>
-                );
-              })}
+              {filtered.map((v) => (
+                <tr key={v.vendor} className="hover:bg-surface-elevated/50 transition-colors">
+                  <td className="py-4 px-4">
+                    <div className="font-medium text-foreground">{v.vendor}</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">{v.description}</div>
+                  </td>
+                  <td className="py-4 px-4 text-muted-foreground">{v.country}</td>
+                  <td className="py-4 px-4 text-muted-foreground hidden lg:table-cell">{v.payment}</td>
+                  <td className="py-4 px-4 text-right">
+                    <span className={`inline-block text-xs border border-border px-2.5 py-1 rounded-md font-medium ${v.trust === "Trusted" ? "bg-background text-gold" : "bg-background text-muted-foreground"
+                      }`}>
+                      {v.trust}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+              {filtered.length === 0 && (
+                <tr>
+                  <td colSpan={4} className="py-8 text-center text-xs text-muted-foreground">
+                    No vendors match your search criteria.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
-    </div>
+      </div>
     </section>
   );
 }
