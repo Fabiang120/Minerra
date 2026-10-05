@@ -42,8 +42,8 @@ export default function Youtubers() {
     },
   ]
   return (
-    <section className="px-8 pt-12 pb-24 mt-8 gap-4 lg:gap-18 grid sm:grid-cols-4 md:grid-cols-8 md:px-12 md:pt-16 xl:grid-cols-12">
-      <div className="col-span-full lg:col-start-1 lg:col-end-4 xl:col-start-1 xl:col-end-4 flex flex-col mb-6 lg:mb-0 gap-4">
+    <section className="px-4 pt-12 pb-24 mt-8 grid sm:grid-cols-4 md:grid-cols-8 md:px-6 md:pt-16 xl:grid-cols-12 gap-6">
+      <div className="col-span-full lg:px-3 lg:col-start-1 lg:col-end-4 xl:col-start-1 xl:col-end-4 flex flex-col mb-6 lg:mb-0 gap-4">
         <h4 className="text-xs font-medium tracking-[0.15em] text-gold uppercase">HAND-PICKED</h4>
         <h1>Mining creators.</h1>
         <p className="mt-2 max-w-[44ch]">The YouTubers we actually watch, people who teach mining honestly, with real numbers and real rigs.</p>

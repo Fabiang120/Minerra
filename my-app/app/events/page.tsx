@@ -44,8 +44,8 @@ export default function Events() {
   ];
 
   return (
-    <section className="px-8 pt-12 pb-24 mt-8 gap-4 lg:gap-18 grid sm:grid-cols-4 md:grid-cols-8 md:px-12 md:pt-16 xl:grid-cols-12">
-      <div className="col-span-full lg:col-start-1 lg:col-end-4 xl:col-start-1 xl:col-end-4 flex flex-col mb-6 lg:mb-0 gap-4">
+    <section className="px-4 pt-12 pb-24 mt-8 grid gap-6 sm:grid-cols-4 md:grid-cols-8 md:px-6 md:pt-16 xl:grid-cols-12 lg:gap-20">
+      <div className="col-span-full lg:px-3 lg:col-start-1 lg:col-end-4 xl:col-start-1 xl:col-end-4 flex flex-col mb-6 lg:mb-0 gap-4">
         <h4 className="text-xs font-medium tracking-[0.15em] text-gold uppercase">AROUND THE WORLD</h4>
         <h1>Mining events.</h1>
         <p className="mt-2 max-w-[44ch]">Conferences, summits and meetups worth your flight. We update this calendar quarterly.</p>
@@ -56,23 +56,20 @@ export default function Events() {
           Submit an event
         </a>
       </div>
-      <div className="col-span-full min-w-0 grid gap-4">
+      <div className="col-span-full min-w-0 grid gap-3 lg:col-start-4 lg:col-end-9 xl:col-start-4 xl:col-end-13">
         {events.map((e) => {
           return (
             <div
               key={e.name}
               className="group flex items-stretch gap-5 rounded-2xl bg-surface p-5 ring-1 ring-border transition-all hover:-translate-y-0.5 hover:bg-surface-elevated hover:ring-white/15"
             >
-              {/* Date Box / Badge */}
-              <div className="grid w-20 shrink-0 place-items-center rounded-xl bg-background ring-1 ring-border py-3">
+              <div className="grid w-fit px-6 shrink-0 place-items-center rounded-xl bg-background ring-1 ring-border">
                 <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--gold)]">{e.startDate.split(' ')[0]}</div>
                 <div className="text-xl font-medium tabular-nums text-foreground">{e.startDate.split(' ')[1]}</div>
               </div>
-
-              {/* Main Content Area */}
               <div className="min-w-0 flex-1 flex flex-col gap-3">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="font-medium text-foreground">{e.name}</h3>
+                  <h5 className="font-medium text-foreground">{e.name}</h5>
                   <span className="text-xs text-muted-foreground">{e.startDate} – {e.endDate}, {e.year}</span>
                 </div>
                 <div className="text-sm text-muted-foreground flex items-center">
