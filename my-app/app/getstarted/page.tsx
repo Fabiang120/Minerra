@@ -1,10 +1,12 @@
+import { StepCard, StepArrow } from "../components/StepCard"
 export default function GetStarted() {
   return (
-    <section>
-      <h4>GET STARTED</h4>
-      <h2>Learn.Compare.Buy safe.</h2>
-      <p>Three steps to go from curious to mining with a machine you actually trust.</p>
-      <button>Start learning</button>
+    <section className="flex flex-col md:flex-row items-center justify-center gap-4 px-6 py-30">
+      <StepCard step="01" title="Learn" linkText="Open Library" />
+      <StepArrow />
+      <StepCard step="02" title="Compare" linkText="See Miners" />
+      <StepArrow />
+      <StepCard step="03" title="Buy safe" linkText="Browse Vendors" />
     </section>
   );
 }
