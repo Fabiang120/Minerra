@@ -6,10 +6,10 @@ type StepCardProps = {
 
 export function StepCard({ step, title, linkText }: StepCardProps) {
   return (
-    <div className="flex flex-col px-12 py-12 w-80 h-80 items-start justify-between ring-1 ring-border">
-      <span className="text-gold tracking-widest">STEP {step}</span>
-      <h1>{title}</h1>
-      <div className="flex items-center gap-3 text-xs tracking-wider font-medium text-muted-foreground uppercase">
+    <div className="flex flex-col items-start ring-1 ring-border transition-all duration-500 hover:ring-gold px-12 w-full h-60 justify-start lg:hover:w-90 lg:justify-between lg:w-80 lg:h-65 lg:px-12 lg:py-12">
+      <span className="mt-auto lg:mt-0 text-gold tracking-widest">STEP {step}</span>
+      <h1 className="mt-6 mb-12 lg:mt-0 lg:mb-6">{title}</h1>
+      <div className="mb-auto lg:mb-0 flex items-center gap-3 text-xs tracking-wider font-medium text-muted-foreground uppercase">
         <span className="w-6 h-px bg-gold" />
         {linkText}
       </div>

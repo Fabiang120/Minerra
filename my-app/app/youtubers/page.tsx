@@ -53,7 +53,7 @@ export default function Youtubers() {
           return (
             <div
               key={y.name}
-              className="bg-surface rounded-2xl px-6 py-6"
+              className="bg-surface rounded-2xl px-6 py-6 transition-transform hover:bg-surface-elevated hover:-translate-y-0.5 hover:cursor-pointer"
             >
               <div className="flex flex-col items-start gap-3">
                 <div className="flex justify-between items-center w-full">

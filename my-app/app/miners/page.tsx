@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 export default function Miners() {
-  const [coins] = useState(["BTC", "ZEC", "LTC", "DOGE", "ETC", "XMR", "KDA", "ALEO", "RXD", "GRIN"]);
+  const [coins] = useState(["ALL", "BTC", "ZEC", "LTC", "DOGE", "ETC", "XMR", "KDA", "ALEO", "RXD", "GRIN"]);
   const [miners] = useState([
     {
       id: "1",
@@ -70,7 +70,7 @@ export default function Miners() {
       coinSymbol: "Ξ",
     },
   ]);
-  const [selectedCoin, setSelectedCoin] = useState("All");
+  const [selectedCoin, setSelectedCoin] = useState("ALL");
   const [searchedMiner, setSearchedMiner] = useState("");
 
   const handleSearchedMiner = (miner: string) => {
@@ -81,7 +81,7 @@ export default function Miners() {
   }
 
   const filteredMiners = miners.filter((m) => {
-    const matchesCoin = selectedCoin === "All" || m.coin === selectedCoin;
+    const matchesCoin = selectedCoin === "ALL" || m.coin === selectedCoin;
     const query = searchedMiner.toLowerCase();
     const matchesSearch =
       m.name.toLowerCase().includes(query) ||
@@ -144,7 +144,7 @@ export default function Miners() {
           <input
             id="search-miner"
             aria-label="Search miners"
-            className="bg-surface text-foreground placeholder:text-muted-foreground rounded-2xl w-full py-3 pl-9 pr-3 text-sm focus:outline-none"
+            className="bg-surface text-foreground placeholder:text-muted-foreground rounded-2xl w-full py-3 pl-9 pr-3 text-sm focus:outline-none focus:ring-1 focus:ring-border"
             type="text"
             value={searchedMiner}
             onChange={(e) => handleSearchedMiner(e.target.value)}
@@ -155,7 +155,7 @@ export default function Miners() {
         <div className="bg-surface rounded-2xl overflow-hidden w-full">
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-surface-elevated border-b border-border text-xs uppercase tracking-wider text-muted-foreground font-medium">
+              <tr className="bg-surface border-b border-border text-xs uppercase tracking-wider text-muted-foreground font-medium">
                 <th className="py-4 px-4">MODEL</th>
                 <th className="py-4 px-4 hidden lg:block">RELEASE</th>
                 <th className="py-4 px-4">HASHRATE</th>

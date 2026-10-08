@@ -74,7 +74,7 @@ export default function Learn() {
         <p className="mt-2 max-w-[44ch] text-sm leading-relaxed text-muted-foreground">Hand-Picked resources that explain Bitcoin honestly, from the absolute basics to advanced monetary thesis material and protocol internals.</p>
       </div>
       <div className="col-span-full min-w-0 flex flex-col gap-6 lg:col-start-4 lg:col-end-9 xl:col-start-4 xl:col-end-13">
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 ">
           {experience.map((e) => {
             const active = selectedExperience === e;
             return (
@@ -96,7 +96,7 @@ export default function Learn() {
             return (
               <div
                 key={l.name}
-                className="flex flex-col bg-surface p-6 ring-1 ring-border"
+                className="flex flex-col bg-surface p-6 ring-1 ring-border transition-transform hover:bg-surface-elevated hover:-translate-y-0.5 hover:cursor-pointer"
               >
                 <div className="mb-4 flex items-center gap-2">
                   <span className="bg-background px-2.5 py-1 text-xs font-medium uppercase tracking-wider text-gold ring-1 ring-border">

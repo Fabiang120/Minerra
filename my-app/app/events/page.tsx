@@ -61,7 +61,7 @@ export default function Events() {
           return (
             <div
               key={e.name}
-              className="group flex items-stretch gap-5 rounded-2xl bg-surface p-5 ring-1 ring-border transition-all hover:-translate-y-0.5 hover:bg-surface-elevated hover:ring-white/15"
+              className="group flex items-stretch gap-5 rounded-2xl bg-surface p-5 ring-1 ring-border transition-all hover:-translate-y-0.5 hover:bg-surface-elevated hover:cursor-pointer hover:ring-white/15"
             >
               <div className="grid w-fit px-6 shrink-0 place-items-center rounded-xl bg-background ring-1 ring-border">
                 <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">{e.startDate.split(' ')[0]}</div>
