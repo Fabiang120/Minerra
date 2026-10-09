@@ -102,6 +102,16 @@ export default function Vendors() {
     return matchesRegion && matchesSearch;
   });
 
+  function getInitials(name: string, maxInitials = 2): string {
+    if (!name) return "";
+    return name
+      .trim()
+      .split(/\s+/)
+      .map((word) => word[0]?.toUpperCase())
+      .filter(Boolean)
+      .slice(0, maxInitials)
+      .join("");
+  }
   return (
     <section className="px-4 pt-12 pb-24 mt-8 grid sm:grid-cols-4 md:grid-cols-8 md:px-6 md:pt-16 xl:grid-cols-12 gap-6">
       <div className="col-span-full lg:px-3 lg:col-start-1 lg:col-end-4 xl:col-start-1 xl:col-end-4 flex flex-col mb-6 lg:mb-0 gap-4">
@@ -122,7 +132,7 @@ export default function Vendors() {
         </div>
       </div>
 
-      <div className="col-span-full min-w-0 flex flex-col gap-6 lg:col-start-4 lg:col-end-9 xl:col-start-4 xl:col-end-13">
+      <div className="col-span-full min-w-0 flex flex-col gap-4 lg:col-start-4 lg:col-end-9 xl:col-start-4 xl:col-end-13">
         <div className="flex flex-wrap gap-2">
           {regions.map((r) => {
             const active = selectedRegion === r;
@@ -167,10 +177,10 @@ export default function Vendors() {
           />
         </div>
 
-        <div className="bg-surface rounded-2xl overflow-hidden w-full">
+        <div className="bg-surface rounded-2xl overflow-hidden w-full ring-1 ring-border">
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-surface-elevated border-b border-border text-xs uppercase tracking-wider text-muted-foreground font-medium">
+              <tr className="bg-surface border-b border-border text-xs uppercase tracking-wider text-muted-foreground font-medium">
                 <th className="py-4 px-4">VENDOR</th>
                 <th className="py-4 px-4">COUNTRY</th>
                 <th className="py-4 px-4 hidden lg:table-cell">PAYMENT</th>
@@ -181,8 +191,15 @@ export default function Vendors() {
               {filtered.map((v) => (
                 <tr key={v.vendor} className="hover:bg-surface-elevated/50 transition-colors">
                   <td className="py-4 px-4">
-                    <div className="font-medium text-foreground">{v.vendor}</div>
-                    <div className="text-xs text-muted-foreground mt-0.5">{v.description}</div>
+                    <div className="flex items-center gap-3">
+                      <span className="flex size-10 shrink-0 items-center justify-center bg-surface-elevated text-xs font-semibold text-white ring-1 ring-border">
+                        {getInitials(v.vendor)}
+                      </span>
+                      <div className="flex flex-col">
+                        <div className="font-medium text-foreground">{v.vendor}</div>
+                        <div className="text-xs text-muted-foreground">{v.description}</div>
+                      </div>
+                    </div>
                   </td>
                   <td className="py-4 px-4 text-muted-foreground">{v.country}</td>
                   <td className="py-4 px-4 text-muted-foreground hidden lg:table-cell">{v.payment}</td>
