@@ -3,6 +3,16 @@ import { useState } from 'react';
 
 export default function Miners() {
   const [coins] = useState(["ALL", "BTC", "ZEC", "LTC", "DOGE", "ETC", "XMR", "KDA", "ALEO", "RXD", "GRIN"]);
+  const coinMeta: Record<string, { symbol: string; bg: string }> = {
+    BTC: { symbol: "₿", bg: "bg-amber-500 text-black" },
+    LTC: { symbol: "Ł", bg: "bg-slate-300 text-black" },
+    ETC: { symbol: "Ξ", bg: "bg-emerald-500 text-black" },
+    KAS: { symbol: "K", bg: "bg-teal-500 text-black" },
+    DOGE: { symbol: "Ð", bg: "bg-yellow-400 text-black" },
+    XMR: { symbol: "ɱ", bg: "bg-orange-500 text-white" },
+    ZEC: { symbol: "ⓩ", bg: "bg-yellow-600 text-black" },
+  };
+
   const [miners] = useState([
     {
       id: "1",
@@ -112,16 +122,22 @@ export default function Miners() {
         <div className="flex flex-wrap gap-1">
           {coins.map((c) => {
             const active = selectedCoin === c;
+            const symbol = coinMeta[c];
             return (
               <button
                 key={c}
                 onClick={() => handleSelectedCoin(c)}
-                className={`py-1.5 px-3 rounded-2xl text-xs font-medium transition-colors border ${active
+                className={`inline-flex items-center gap-1.5 py-1.5 px-3 rounded-2xl text-xs font-medium transition-colors border ${active
                     ? "bg-foreground text-background border-foreground font-semibold"
                     : "bg-surface text-muted-foreground hover:text-foreground border-border"
                   }`}
               >
-                {c}
+                {symbol && (
+                  <span className={`size-4 rounded-full flex items-center justify-center text-[9px] font-bold ${symbol.bg}`}>
+                    {symbol.symbol}
+                  </span>
+                )}
+                <span>{c}</span>
               </button>
             );
           })}
