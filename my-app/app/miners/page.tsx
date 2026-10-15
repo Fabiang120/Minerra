@@ -101,15 +101,15 @@ export default function Miners() {
   });
 
   return (
-    <section className="px-4 pt-12 pb-24 mt-8 grid sm:grid-cols-4 md:grid-cols-8 md:px-6 md:pt-16 xl:grid-cols-12 gap-6">
-      <div className="col-span-full lg:px-3 lg:col-start-1 lg:col-end-4 xl:col-start-1 xl:col-end-4 flex flex-col mb-6 lg:mb-0 gap-4">
+    <section className="px-4 pt-12 pb-24 mt-8 grid sm:grid-cols-4 md:grid-cols-8 md:px-6 md:pt-16 xl:grid-cols-12 gap-6 xl:gap-8">
+      <div className="col-span-full lg:px-3 lg:col-start-1 lg:mr-3 lg:col-end-4 xl:col-start-1 xl:col-end-4 flex flex-col mb-6 lg:mb-0 gap-4">
         <h4 className="text-xs font-medium tracking-[0.15em] text-gold uppercase">
           Profitability
         </h4>
         <h1>
           ASIC miners.
         </h1>
-        <p className="mt-2 max-w-[44ch]">
+        <p className="mt-2 max-w-[44ch] text-pretty">
           Every modern ASIC ranked by daily net profitability at industrial pricing of $0.06 / kWh.
         </p>
         <div className="mt-2 flex items-center gap-1">

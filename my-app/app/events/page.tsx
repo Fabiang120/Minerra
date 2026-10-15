@@ -44,8 +44,8 @@ export default function Events() {
   ];
 
   return (
-    <section className="px-4 pt-12 pb-24 mt-8 grid gap-6 sm:grid-cols-4 md:grid-cols-8 md:px-6 md:pt-16 xl:grid-cols-12 lg:gap-20">
-      <div className="col-span-full lg:px-3 lg:col-start-1 lg:col-end-4 xl:col-start-1 xl:col-end-4 flex flex-col mb-6 lg:mb-0 gap-4">
+    <section className="px-4 pt-12 pb-24 mt-8 grid gap-6 sm:grid-cols-4 md:grid-cols-8 md:px-6 md:pt-16 xl:grid-cols-12">
+      <div className="col-span-full flex flex-col mb-6 gap-4 lg:mr-3 lg:px-3 lg:col-start-1 lg:col-end-4 lg:mb-0">
         <h4 className="text-xs font-medium tracking-[0.15em] text-gold uppercase">AROUND THE WORLD</h4>
         <h1>Mining events.</h1>
         <p className="mt-2 max-w-[44ch]">Conferences, summits and meetups worth your flight. We update this calendar quarterly.</p>

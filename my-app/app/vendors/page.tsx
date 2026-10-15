@@ -2,11 +2,6 @@
 import { useState } from "react";
 
 export default function Vendors() {
-  const stats = [
-    { label: "Vendors", value: "8" },
-    { label: "Countries", value: "7" },
-  ];
-
   type Vendor = {
     description: string;
     vendor: string;
@@ -114,22 +109,22 @@ export default function Vendors() {
   }
   return (
     <section className="px-4 pt-12 pb-24 mt-8 grid sm:grid-cols-4 md:grid-cols-8 md:px-6 md:pt-16 xl:grid-cols-12 gap-6">
-      <div className="col-span-full lg:px-3 lg:col-start-1 lg:col-end-4 xl:col-start-1 xl:col-end-4 flex flex-col mb-6 lg:mb-0 gap-4">
+      <div className="col-span-full flex flex-col mb-6 lg:px-3 lg:mr-3 lg:col-start-1 lg:col-end-4 xl:col-start-1 xl:col-end-4 lg:mb-0 gap-4">
         <h4 className="text-xs font-medium tracking-[0.15em] text-gold uppercase">Personally Verified</h4>
         <h1>Trusted vendors.</h1>
-        <p className="mt-2 max-w-[44ch]">Directory of official distributors and resellers. Each is manually audited — we strike anyone who ships late, ghosts support, or misrepresents inventory.</p>
-        <div className="grid gap-px grid-cols-2 overflow-hidden rounded-2xl bg-border ring-1 ring-border">
-          {stats.map((s) => (
-            <div key={s.label} className="bg-background p-4 text-left">
-              <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
-                {s.label}
-              </div>
-              <div className="text-lg font-medium tabular-nums">
-                {s.value}
-              </div>
-            </div>
-          ))}
-        </div>
+        <p className="mt-2 max-w-[44ch] max-w-lg:max-w-none text-pretty">Directory of official distributors and resellers. Each is manually audited, we strike anyone who ships late, ghosts support, or misrepresents inventory.</p>
+        <dl className="grid gap-px grid-cols-2 overflow-hidden rounded-2xl bg-border ring-1 ring-border">
+          <div className="bg-background p-4">
+            <dt className="uppercase">Vendors</dt>
+            <dd className="tabular-nums font-medium">{VENDORS.length}</dd>
+          </div>
+          <div className="bg-background p-4">
+            <dt className="uppercase">Countries</dt>
+            <dd className="mt-1 font-medium tabular-nums text-foreground">
+              {new Set(VENDORS.map((v) => v.country)).size}
+            </dd>
+          </div>
+        </dl>
       </div>
 
       <div className="col-span-full min-w-0 flex flex-col gap-4 lg:col-start-4 lg:col-end-9 xl:col-start-4 xl:col-end-13">
@@ -141,8 +136,8 @@ export default function Vendors() {
                 key={r}
                 onClick={() => handleSelectRegion(r)}
                 className={`py-1.5 px-4 rounded-2xl text-xs font-medium transition-colors border ${active
-                    ? "bg-foreground text-background border-foreground font-semibold"
-                    : "bg-surface text-muted-foreground hover:text-foreground border-border"
+                  ? "bg-foreground text-background border-foreground font-semibold"
+                  : "bg-surface text-muted-foreground hover:text-foreground border-border"
                   }`}
               >
                 {r}
