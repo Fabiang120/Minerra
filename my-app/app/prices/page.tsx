@@ -25,7 +25,7 @@ export default function Prices() {
       Coin: "Bitcoin",
       description: "BTC",
       Algorithm: "SHA-256",
-      Price: 64281.00,
+      Price: 64281.0,
       twentyfour: "+2.4%",
       sevenday: "+5.1%",
       volume: "$24.6B",
@@ -45,7 +45,7 @@ export default function Prices() {
       Coin: "Litecoin",
       description: "LTC",
       Algorithm: "Scrypt",
-      Price: 68.40,
+      Price: 68.4,
       twentyfour: "-0.8%",
       sevenday: "+1.2%",
       volume: "$310M",
@@ -55,7 +55,7 @@ export default function Prices() {
       Coin: "Monero",
       description: "XMR",
       Algorithm: "RandomX",
-      Price: 142.20,
+      Price: 142.2,
       twentyfour: "-1.2%",
       sevenday: "+0.8%",
       volume: "$62M",
@@ -65,7 +65,7 @@ export default function Prices() {
       Coin: "Zcash",
       description: "ZEC",
       Algorithm: "Equihash",
-      Price: 31.50,
+      Price: 31.5,
       twentyfour: "+0.5%",
       sevenday: "+3.4%",
       volume: "$48M",
@@ -75,7 +75,7 @@ export default function Prices() {
       Coin: "Dash",
       description: "DASH",
       Algorithm: "X11",
-      Price: 25.80,
+      Price: 25.8,
       twentyfour: "+1.0%",
       sevenday: "-1.5%",
       volume: "$28M",
@@ -153,7 +153,7 @@ export default function Prices() {
         <p className="mt-2 max-w-[44ch]">
           The cryptocurrencies most relevant to ASIC and GPU mining economics — with 24h and 7d motion, volume, market cap and per-algorithm filtering.
         </p>
-        <div className="grid gap-px grid-cols-2 overflow-hidden rounded-2xl bg-border ring-1 ring-border">
+        <div className="grid gap-px grid-cols-2 overflow-hidden bg-border ring-1 ring-border">
           {stats.map((s) => (
             <div key={s.label} className="bg-background p-4 text-left">
               <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
@@ -204,7 +204,7 @@ export default function Prices() {
           <input
             id="search-coin"
             aria-label="Search coin"
-            className="bg-surface text-foreground placeholder:text-muted-foreground rounded-2xl w-full py-3 pl-9 pr-3 text-sm focus:outline-none"
+            className="bg-surface text-foreground placeholder:text-muted-foreground w-full py-3 pl-9 pr-3 text-sm focus:outline-none"
             type="text"
             value={searchedCoin}
             onChange={(e) => setSearchedCoin(e.target.value)}
@@ -212,52 +212,82 @@ export default function Prices() {
           />
         </div>
 
-        <div className="bg-surface rounded-2xl overflow-hidden w-full">
-          <table className="w-full text-left">
+        <div className="bg-surface overflow-x-auto w-full">
+          <table className="w-full">
             <thead>
               <tr className="bg-surface-elevated border-b border-border text-xs uppercase tracking-wider text-muted-foreground font-medium">
-                <th className="py-4 px-4">COIN</th>
-                <th className="py-4 px-4">ALGORITHM</th>
-                <th className="py-4 px-4">PRICE</th>
-                <th className="py-4 px-4 hidden lg:table-cell">24H</th>
-                <th className="py-4 px-4 hidden lg:table-cell">7D</th>
-                <th className="py-4 px-4">VOLUME</th>
+                <th className="py-4 px-4 text-left w-10">#</th>
+                <th className="py-4 px-4 text-left">COIN</th>
+                <th className="py-4 px-4 text-left">ALGORITHM</th>
+                <th className="py-4 px-4 text-right">PRICE</th>
+                <th className="py-4 px-4 text-right">24H</th>
+                <th className="py-4 px-4 text-right">7D</th>
+                <th className="py-4 px-4 text-right">VOLUME</th>
                 <th className="py-4 px-4 text-right">MARKET CAP</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border text-sm">
-              {filteredcryptocurrencies.map((c) => (
-                <tr key={c.Coin} className="hover:bg-surface-elevated/50 transition-colors">
-                  <td className="py-4 px-4">
+              {filteredcryptocurrencies.map((c, index) => (
+                <tr
+                  key={c.Coin}
+                  className="hover:bg-surface-elevated/50 transition-colors"
+                >
+                  <td className="py-4 px-4 text-xs text-muted-foreground tabular-nums text-left">
+                    {index + 1}
+                  </td>
+                  <td className="py-4 px-4 text-left whitespace-nowrap">
                     <div className="flex items-center gap-3">
-                      <span className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold bg-border text-foreground">
+                      <span className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold bg-border text-foreground shrink-0">
                         {c.description}
                       </span>
                       <div>
-                        <div className="text-foreground font-medium">{c.Coin}</div>
-                        <div className="text-xs text-muted-foreground">{c.description}</div>
+                        <div className="text-foreground font-medium leading-none mb-1">
+                          {c.Coin}
+                        </div>
+                        <div className="text-xs text-muted-foreground leading-none">
+                          {c.description}
+                        </div>
                       </div>
                     </div>
                   </td>
-                  <td className="py-4 px-4 text-muted-foreground">{c.Algorithm}</td>
-                  <td className="py-4 px-4 text-foreground tabular-nums font-medium">
+                  <td className="py-4 px-4 text-left whitespace-nowrap">
+                    <span className="inline-block text-xs ring-1 ring-border bg-background px-2 py-0.5 rounded">
+                      {c.Algorithm}
+                    </span>
+                  </td>
+                  <td className="py-4 px-4 text-right text-foreground tabular-nums font-medium whitespace-nowrap">
                     ${c.Price < 1 ? c.Price.toFixed(4) : c.Price.toLocaleString()}
                   </td>
-                  <td className={`py-4 px-4 tabular-nums hidden lg:table-cell ${c.twentyfour.startsWith("+") ? "text-emerald-400" : "text-red-400"
-                    }`}>
+                  <td
+                    className={`py-4 px-4 text-right tabular-nums whitespace-nowrap ${c.twentyfour.startsWith("+")
+                        ? "text-emerald-400"
+                        : "text-red-400"
+                      }`}
+                  >
                     {c.twentyfour}
                   </td>
-                  <td className={`py-4 px-4 tabular-nums hidden lg:table-cell ${c.sevenday.startsWith("+") ? "text-emerald-400" : "text-red-400"
-                    }`}>
+                  <td
+                    className={`py-4 px-4 text-right tabular-nums whitespace-nowrap ${c.sevenday.startsWith("+")
+                        ? "text-emerald-400"
+                        : "text-red-400"
+                      }`}
+                  >
                     {c.sevenday}
                   </td>
-                  <td className="py-4 px-4 text-muted-foreground tabular-nums">{c.volume}</td>
-                  <td className="py-4 px-4 text-muted-foreground tabular-nums text-right">{c.marketcap}</td>
+                  <td className="py-4 px-4 text-right text-muted-foreground tabular-nums whitespace-nowrap">
+                    {c.volume}
+                  </td>
+                  <td className="py-4 px-4 text-right text-muted-foreground tabular-nums whitespace-nowrap">
+                    {c.marketcap}
+                  </td>
                 </tr>
               ))}
               {filteredcryptocurrencies.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="py-8 text-center text-xs text-muted-foreground">
+                  <td
+                    colSpan={8}
+                    className="py-8 text-center text-xs text-muted-foreground"
+                  >
                     No coins match your criteria.
                   </td>
                 </tr>

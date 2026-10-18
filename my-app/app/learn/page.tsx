@@ -180,8 +180,8 @@ export default function Learn() {
   });
 
   const getTypeColor = (type: string) => {
-    if (type.toLowerCase().includes("book")) return "text-[color:var(--success)]";
-    if (type.toLowerCase().includes("paper") || type.toLowerCase().includes("thesis")) return "text-muted-foreground";
+    if (type.toLowerCase().includes("book") || type.toLowerCase().includes("guide")) return "text-success";
+    if (type.toLowerCase().includes("paper") || type.toLowerCase().includes("thesis") || type.toLowerCase().includes("documentation")) return "text-muted-foreground";
     if (type.toLowerCase().includes("video")) return "text-gold";
     return "text-gold";
   };
